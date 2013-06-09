@@ -6,7 +6,6 @@ use Selenese\CommandResult;
 
 abstract class Command {
 
-    public $command;
     public $target;
     public $value;
 

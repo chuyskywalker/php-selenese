@@ -34,7 +34,6 @@ class Runner {
         // todo: how can we could instruct it to be a truly "fresh" session?
         if ($this->test->commands[0]->target != $this->test->baseUrl.'/') {
             $firstOpen = new open();
-            $firstOpen->command = 'open';
             $firstOpen->target = $this->test->baseUrl;
             array_unshift($this->test, $firstOpen);
         }
