@@ -40,10 +40,13 @@ class Runner {
 
         $results = array();
         foreach ($this->test->commands as $command) {
+            // todo: verbosity option
             echo "Running: | " . str_replace('Selenese\\Command\\', '', get_class($command)) . ' | ' . $command->target. ' | ' . $command->value . ' | ';
             $commandResult = $command->runWebDriver($session);
+            // todo: screenshots after each command option
             echo ($commandResult->success ? ' SUCCESS | ' : ' FAILED | ') . $commandResult->message . "\n";
             $results[] = array($command, $commandResult);
+            // todo: screenshot on fail option
             if ($commandResult->success === false) {
                 $imgData = base64_decode($session->screenshot());
                 file_put_contents('failed.png', $imgData);
