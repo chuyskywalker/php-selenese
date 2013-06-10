@@ -3,6 +3,7 @@
 namespace Selenese\Command;
 
 use Selenese\CommandResult,
+    Selenese\Pattern,
     Selenese\Locator;
 
 abstract class Command {
@@ -31,6 +32,31 @@ abstract class Command {
             throw new \Exception("Could not locate element ($locator) : (" . $locatorObj->type . '=' . $locatorObj->argument . ')');
         }
         return $element;
+    }
+
+    // these are all mostly simliar
+    protected function assert($valueis, $pattern) {
+        $patternobj = new Pattern($pattern);
+        $matched = $patternobj->match($valueis);
+        return new CommandResult($matched, $matched, $matched ? 'Matched' : 'Did not match');
+    }
+
+    protected function assertNot($valueis, $pattern) {
+        $patternobj = new Pattern($pattern);
+        $matched = $patternobj->match($valueis);
+        return new CommandResult(!$matched, !$matched, $matched ? 'Matched and should not have' : 'Correctly did not match');
+    }
+
+    protected function verify($valueis, $pattern) {
+        $patternobj = new Pattern($pattern);
+        $matched = $patternobj->match($valueis);
+        return new CommandResult(true, $matched, $matched ? 'Matched' : 'Did not match');
+    }
+
+    protected function verifyNot($valueis, $pattern) {
+        $patternobj = new Pattern($pattern);
+        $matched = $patternobj->match($valueis);
+        return new CommandResult(true, !$matched, $matched ? 'Matched and should not have' : 'Correctly did not match');
     }
 
 }
