@@ -12,12 +12,11 @@ class verifyTextPresent extends Command {
             $bodyValue = $session->source();
             $pattern = new Pattern($this->target);
             $matches = $pattern->match($bodyValue);
-            // todo: catch errors in locator/typing
             if ($matches) {
-                $msg = 'Matched the string "' . $this->target . '"';
+                $msg = 'Found the string.';
             }
             else {
-                $msg = 'Could not find the string "' . $this->target . '"';
+                $msg = 'Could not find the string';
             }
             return new CommandResult(true, $matches, $msg);
         } catch (\Exception $e) {
