@@ -31,11 +31,10 @@ class Runner {
         $session = $webDriver->session('phantomjs'); // todo: more support here
 
         // always open the base URL and then clear any cookies we've got around
-        // todo: how can we could instruct it to be a truly "fresh" session?
         if ($this->test->commands[0]->target != $this->test->baseUrl.'/') {
             $firstOpen = new open();
             $firstOpen->target = $this->test->baseUrl;
-            array_unshift($this->test, $firstOpen);
+            array_unshift($this->test->commands, $firstOpen);
         }
 
         $results = array();
