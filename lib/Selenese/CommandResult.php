@@ -29,9 +29,9 @@ class CommandResult {
         if (!is_string($message)) {
             throw new \InvalidArgumentException("message must be a boolean");
         }
+        $this->continue = $continue;
         $this->success = $success;
         $this->message = $message;
-        $this->continue = $continue;
     }
 
 }

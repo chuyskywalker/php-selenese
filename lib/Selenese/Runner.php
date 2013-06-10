@@ -56,11 +56,11 @@ class Runner {
             }
 
             // todo: screenshot on fail option
-            if ($commandResult->success === false) {
-                $imgData = base64_decode($session->screenshot());
-                file_put_contents('failed.png', $imgData);
-                break;
-            }
+//            if ($commandResult->success === false) {
+//                $imgData = base64_decode($session->screenshot());
+//                file_put_contents('failed.png', $imgData);
+//                break;
+//            }
         }
         $session->close();
         return $results;
