@@ -46,6 +46,11 @@ class Runner {
             // todo: screenshots after each command option
             echo ($commandResult->success ? ' SUCCESS | ' : ' FAILED | ') . $commandResult->message . "\n";
             $results[] = array($command, $commandResult);
+
+            if ($commandResult->continue === false) {
+                break;
+            }
+
             // todo: screenshot on fail option
             if ($commandResult->success === false) {
                 $imgData = base64_decode($session->screenshot());

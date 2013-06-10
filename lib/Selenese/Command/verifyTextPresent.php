@@ -19,9 +19,9 @@ class verifyTextPresent extends Command {
             else {
                 $msg = 'Could not find the string "' . $this->target . '"';
             }
-            return new CommandResult($matches, $msg);
+            return new CommandResult(true, $matches, $msg);
         } catch (\Exception $e) {
-            return new CommandResult(false, 'Could not verify text presence of "'. $this->target . '. Error: ' . $e->getMessage());
+            return new CommandResult(false, false, 'Could not verify text presence of "'. $this->target . '. Error: ' . $e->getMessage());
         }
 
     }

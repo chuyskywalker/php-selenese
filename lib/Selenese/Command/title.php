@@ -9,10 +9,10 @@ class title extends Command {
     {
         try {
             $title = $session->title();
-            return new CommandResult(true, 'Got page title: "'. $title . '"');
+            return new CommandResult(true, true, 'Got page title: "'. $title . '"');
         }
         catch (\Exception $e) {
-            return new CommandResult(false, 'Failed to fetch page title. Error: ' . $e->getMessage());
+            return new CommandResult(false, false, 'Failed to fetch page title. Error: ' . $e->getMessage());
         }
     }
 }

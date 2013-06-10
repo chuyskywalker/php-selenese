@@ -9,10 +9,11 @@ class open extends Command {
     {
         try {
             $session->open($this->target);
-            return new CommandResult(true, 'Opened: '. $this->target);
+            $url = $session->url();
+            return new CommandResult(true, true, 'Opened, url now: ' . $url);
         }
         catch (\Exception $e) {
-            return new CommandResult(false, 'Could not open: "'. $this->target . '". Error: ' . $e->getMessage());
+            return new CommandResult(false, false, 'Could not open: "'. $this->target . '". Error: ' . $e->getMessage());
         }
     }
 }

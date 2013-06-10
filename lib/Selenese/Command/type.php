@@ -9,12 +9,11 @@ class type extends Command {
     public function runWebDriver(\WebDriverSession $session)
     {
         try {
-            $locator = new Locator($this->target);
-            $session->element($locator->type, $locator->argument)->value($this->split_keys($this->value));
-            return new CommandResult(true, 'Typed "'. $this->value . '" into ' . $this->target);
+            $this->getElement($session, $this->target)->value($this->split_keys($this->value));
+            return new CommandResult(true, true, 'Typed "'. $this->value . '" into ' . $this->target);
         }
         catch (\Exception $e) {
-            return new CommandResult(false, 'Could not type "'. $this->value . '" into ' . $this->target . '. Error: ' . $e->getMessage());
+            return new CommandResult(false, false, 'Could not type "'. $this->value . '" into ' . $this->target . '. Error: ' . $e->getMessage());
         }
     }
     private function split_keys($toSend)
