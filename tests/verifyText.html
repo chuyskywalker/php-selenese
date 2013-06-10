@@ -15,14 +15,22 @@
         <tr><td>verifyText</td><td>css=#test</td><td>exact:Exact Text Match</td></tr>
         <tr><td>verifyText</td><td>css=#regex</td><td>regex:Text</td></tr>
         <tr><td>verifyText</td><td>css=#regex</td><td>regexp:Text</td></tr>
-        <tr><td>verifyText</td><td>css=#regex</td><td>regexpi:text</td></tr>
+        <tr><td>verifyText</td><td>css=#glob</td><td>glob:text</td></tr>
+        <tr><td>verifyText</td><td>css=#glob</td><td>glob:t?xt</td></tr>
+        <tr><td>verifyText</td><td>css=#glob</td><td>glob:Globby * here</td></tr>
+        <tr><td>verifyText</td><td>css=#glob</td><td>glob:should ? fail</td></tr>
+        <tr><td>verifyText</td><td>css=#glob</td><td>regex:should .+ fail</td></tr>
+        <tr><td>verifyText</td><td>css=#glob</td><td>exact:should fail</td></tr>
     </tbody>
 </table>
 
 <!-- TEST CONTENT -->
 
 <p id="test">Exact Text Match</p>
+
 <p id="regex">Exact Text Match</p>
+
+<p id="glob">Globby text here</p>
 
 </body>
 </html>
