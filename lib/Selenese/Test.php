@@ -74,7 +74,9 @@ class Test {
                 $this->commands[] = $commandObj;
             }
             else {
-//                throw new \Exception("Unknown command: ");
+                $unknowncmd = new \Selenese\Command\unknown();
+                $unknowncmd->command = $command . ' [nofile]';
+                $this->commands[] = $unknowncmd;
             }
         }
 
