@@ -7,7 +7,6 @@ class Pattern {
     public $type;
     public $value;
 
-    // todo: convert glob to regex
     // todo: support comma separated lists of values
     public function __construct($pattern) {
         $explode = explode(':', $pattern, 2);
@@ -23,15 +22,29 @@ class Pattern {
 
     /**
      * @param string $content
+     * @throws \Exception
      * @return bool
      */
     public function match($content) {
-        // todo: switch case by method
-        if (stristr($content, $this->value) !== false) {
-            return true;
-        }
-        else {
-            return false;
+        switch ($this->type) {
+            case 'glob':
+                return fnmatch($this->value, $content);
+                break;
+            case 'regexpi':
+                $flags = 'i';
+            case 'regexp':
+            case 'regex':
+                if (!isset($flags)) {
+                    $flags = '';
+                }
+                return (bool) preg_match('/' . $this->value .  '/' . $flags, $content);
+                break;
+            case 'exact':
+                return $content == $this->value;
+                break;
+            default:
+                throw new \Exception("Unsupported pattern matching type: " . $this->type);
+                break;
         }
     }
 
