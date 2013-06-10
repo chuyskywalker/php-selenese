@@ -56,16 +56,21 @@ class Test {
         foreach ($rows as $row) {
             /** @var \DOMElement $row */
             $tds = $row->getElementsByTagName('td');
+
+            // gold!
             $command = $tds->item(0)->nodeValue;
             $target  = $tds->item(1)->nodeValue;
             $value   = $tds->item(2)->nodeValue;
-            $commandClass = '\\Selenese\\Command\\' . $tds->item(0)->nodeValue;
+
+            // there is no "andWait"
+            $command = str_replace('andWait', '', $command);
+
+            $commandClass = '\\Selenese\\Command\\' . $command;
             if (class_exists($commandClass)) {
                 /** @var Command\Command $command */
                 $commandObj = new $commandClass();
-                $commandObj->command = $command;
-                $commandObj->target  = ($command == 'open' ? $this->baseUrl : '') . $target;
-                $commandObj->value   = $value;
+                $commandObj->arg1 = ($command == 'open' ? $this->baseUrl : '') . $target;
+                $commandObj->arg2 = $value;
                 $this->commands[] = $commandObj;
             }
             else {

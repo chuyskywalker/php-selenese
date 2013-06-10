@@ -2,25 +2,17 @@
 
 namespace Selenese\Command;
 
-use Selenese\Pattern,
-    Selenese\CommandResult;
+use Selenese\CommandResult;
 
+// verifyTextPresent(pattern)
 class verifyTextPresent extends Command {
     public function runWebDriver(\WebDriverSession $session)
     {
         try {
             $bodyValue = $session->source();
-            $pattern = new Pattern($this->target);
-            $matches = $pattern->match($bodyValue);
-            if ($matches) {
-                $msg = 'Found the string.';
-            }
-            else {
-                $msg = 'Could not find the string';
-            }
-            return new CommandResult(true, $matches, $msg);
+            return $this->verify($bodyValue, $this->arg1);
         } catch (\Exception $e) {
-            return new CommandResult(false, false, 'Could not verify text presence of "'. $this->target . '. Error: ' . $e->getMessage());
+            return new CommandResult(false, false, 'Could not verify text presence of "'. $this->arg1 . '. Error: ' . $e->getMessage());
         }
 
     }

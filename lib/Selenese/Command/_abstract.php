@@ -8,8 +8,8 @@ use Selenese\CommandResult,
 
 abstract class Command {
 
-    public $target;
-    public $value;
+    public $arg1;
+    public $arg2;
 
     /**
      * @param \WebDriverSession $session

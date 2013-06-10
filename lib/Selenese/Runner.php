@@ -31,9 +31,9 @@ class Runner {
         $session = $webDriver->session('phantomjs'); // todo: more support here
 
         // always open the base URL and then clear any cookies we've got around
-        if ($this->test->commands[0]->target != $this->test->baseUrl.'/') {
+        if ($this->test->commands[0]->arg1 != $this->test->baseUrl.'/') {
             $firstOpen = new open();
-            $firstOpen->target = $this->test->baseUrl;
+            $firstOpen->arg1 = $this->test->baseUrl;
             array_unshift($this->test->commands, $firstOpen);
         }
 
@@ -41,7 +41,7 @@ class Runner {
         foreach ($this->test->commands as $command) {
 
             // todo: verbosity option
-            echo "Running: | " . str_replace('Selenese\\Command\\', '', get_class($command)) . ' | ' . $command->target. ' | ' . $command->value . ' | ';
+            echo "Running: | " . str_replace('Selenese\\Command\\', '', get_class($command)) . ' | ' . $command->arg1. ' | ' . $command->arg2 . ' | ';
 
             $commandResult = $command->runWebDriver($session);
 

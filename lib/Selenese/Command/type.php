@@ -2,18 +2,18 @@
 
 namespace Selenese\Command;
 
-use Selenese\Locator,
-    Selenese\CommandResult;
+use Selenese\CommandResult;
 
+// type(locator,value)
 class type extends Command {
     public function runWebDriver(\WebDriverSession $session)
     {
         try {
-            $this->getElement($session, $this->target)->value($this->split_keys($this->value));
-            return new CommandResult(true, true, 'Typed "'. $this->value . '" into ' . $this->target);
+            $this->getElement($session, $this->arg1)->value($this->split_keys($this->arg2));
+            return new CommandResult(true, true, 'Typed "'. $this->arg2 . '" into ' . $this->arg1);
         }
         catch (\Exception $e) {
-            return new CommandResult(false, false, 'Could not type "'. $this->value . '" into ' . $this->target . '. Error: ' . $e->getMessage());
+            return new CommandResult(false, false, 'Could not type "'. $this->arg2 . '" into ' . $this->arg1 . '. Error: ' . $e->getMessage());
         }
     }
     private function split_keys($toSend)
