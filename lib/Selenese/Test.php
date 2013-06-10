@@ -75,7 +75,7 @@ class Test {
             }
             else {
                 $unknowncmd = new \Selenese\Command\unknown();
-                $unknowncmd->command = $command . ' [nofile]';
+                $unknowncmd->command = $command;
                 $this->commands[] = $unknowncmd;
             }
         }
