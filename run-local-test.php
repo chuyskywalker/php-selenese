@@ -1,7 +1,8 @@
 <?php
 
-$serverUrl = $argv[1];
-$testFile = $argv[2];
+$abspath = __DIR__ . '/tests';
+$testFileFullPath = $abspath . '/' . $argv[1];
+$serverUrl = 'file://' . $testFileFullPath;
 
 // load up reqs
 require __DIR__ . '/lib/php-webdriver-master/__init__.php';
@@ -24,7 +25,7 @@ use Selenese\Runner;
 try {
     // get the test rolling
     $test = new Test();
-    $commandList = $test->loadFromSeleneseHtml($testFile);
+    $commandList = $test->loadFromSeleneseHtml($testFileFullPath);
 
     // these test are unique in that we override the locate
     $test->baseUrl = $serverUrl;
@@ -37,6 +38,8 @@ catch (\Exception $e) {
     // oops.
     echo 'Test failed: ' . $e->getMessage() . "\n";
 }
+
+echo "\n";
 
 // clean up the phantom instance
 exec("kill -9 $pid");
