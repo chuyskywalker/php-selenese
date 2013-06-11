@@ -4,7 +4,8 @@ namespace Selenese\Command;
 
 use Selenese\CommandResult,
     Selenese\Pattern,
-    Selenese\Locator;
+    Selenese\Locator,
+    Selenese\Exception\NoSuchElement;
 
 abstract class Command {
 
@@ -26,10 +27,15 @@ abstract class Command {
      * @return \WebDriverElement
      */
     protected function getElement(\WebDriverSession $session, $locator) {
-        $locatorObj = new Locator($locator);
-        $element = $session->element($locatorObj->type, $locatorObj->argument);
+        try {
+            $locatorObj = new Locator($locator);
+            $element = $session->element($locatorObj->type, $locatorObj->argument);
+        }
+        catch (\NoSuchElementWebDriverError $e) {
+            $element = null;
+        }
         if ($element === null) {
-            throw new \Exception("Could not locate element ($locator) : (" . $locatorObj->type . '=' . $locatorObj->argument . ')');
+            throw new NoSuchElement($locator);
         }
         return $element;
     }
