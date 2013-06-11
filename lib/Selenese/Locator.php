@@ -28,9 +28,9 @@ class Locator {
         // convert from selenese to webdriver
         switch ($this->type) {
             // todo: fix these exceptions if possible/needed
-//            case 'identifier':
-//            case 'ui':
-//            case 'dom':
+//            case 'identifier': // todo: this is possible with some song & dance in a common locator routine
+//            case 'ui': // ha. haha. hahahahahaha. No. Good luck on whomever might tackle this...
+//            case 'dom': // I don't think this one is possible
             case 'css': $this->type = 'css selector'; break;
             case 'id': $this->type = 'id'; break;
             case 'name': $this->type = 'name'; break;
