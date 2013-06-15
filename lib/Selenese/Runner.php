@@ -43,7 +43,12 @@ class Runner {
             // todo: verbosity option
             echo "Running: | " . str_replace('Selenese\\Command\\', '', get_class($command)) . ' | ' . $command->arg1. ' | ' . $command->arg2 . ' | ';
 
-            $commandResult = $command->runWebDriver($session);
+            try {
+                $commandResult = $command->runWebDriver($session);
+            }
+            catch (\Exception $e) {
+                $commandResult = new CommandResult(false, false, $e->getMessage());
+            }
 
             // todo: screenshots after each command option
 
