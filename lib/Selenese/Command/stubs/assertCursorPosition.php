@@ -3,6 +3,6 @@
 namespace Selenese\Command;
 
 // assertCursorPosition(locator,pattern)
-class addLocationStrategy extends Stub {
+class assertCursorPosition extends Stub {
     public $command = "assertCursorPosition";
 }
