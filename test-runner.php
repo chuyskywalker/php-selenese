@@ -3,12 +3,7 @@
 // load up reqs
 // todo: autoload/psr/etc/etc
 require __DIR__ . '/lib/php-webdriver-master/__init__.php';
-foreach (glob(__DIR__ . '/lib/Selenese/*php') as $file) {
-    require $file;
-}
-foreach (glob(__DIR__ . '/lib/Selenese/*/*php') as $file) {
-    require $file;
-}
+require __DIR__ . '/lib/Selenese/__init__.php';
 
 // start phantom
 $cmd = ''. __DIR__ .'/lib/phantomjs-1.9.1-linux-x86_64/bin/phantomjs --webdriver=5555 > phantom.log 2>&1 & echo $!';
