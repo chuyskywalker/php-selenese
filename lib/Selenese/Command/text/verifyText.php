@@ -11,8 +11,7 @@ class verifyText extends Command {
             return $this->verify($elementText, $this->arg2);
         }
         catch (\Exception $e) {
-            return $this->commandResult(false, false, 'Could not verify text presence of "'. $this->arg2 . '. Error: ' . $e->getMessage());
+            return $this->commandResult(false, false, 'Error: ' . $e->getMessage());
         }
-
     }
 }
