@@ -2,8 +2,10 @@
 
 namespace Selenese\Command;
 
-// verifyElementPresent(locator)
-class verifyElementPresent extends Command {
+use Selenese\Exception\NoSuchElement;
+
+// assertElementPresent(locator)
+class assertElementPresent extends Command {
 
     /**
      * @see Command::runWebDriver()
@@ -15,10 +17,7 @@ class verifyElementPresent extends Command {
             return $this->commandResult(true, true, 'Found');
         }
         catch (NoSuchElement $e) {
-            return $this->commandResult(true, false, 'Not found');
-        }
-        catch (\Exception $e) {
-            return $this->commandResult(false, false, 'Significant error in locating element. Error: ' . $e->getMessage());
+            return $this->commandResult(false, false, 'Not found');
         }
     }
 
