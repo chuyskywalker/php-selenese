@@ -5,7 +5,8 @@ namespace Selenese\Command;
 use Selenese\CommandResult,
     Selenese\Pattern,
     Selenese\Locator,
-    Selenese\Exception\NoSuchElement;
+    Selenese\Exception\NoSuchElement
+    ;
 
 abstract class Command {
 
@@ -24,6 +25,7 @@ abstract class Command {
      * @param \WebDriverSession $session
      * @param string $locator
      * @throws \Exception
+     * @throws \NoSuchElementWebDriverError
      * @return \WebDriverElement
      */
     protected function getElement(\WebDriverSession $session, $locator) {
@@ -63,6 +65,13 @@ abstract class Command {
         $patternobj = new Pattern($pattern);
         $matched = $patternobj->match($valueis);
         return new CommandResult(true, !$matched, $matched ? 'Matched and should not have' : 'Correctly did not match');
+    }
+
+    /**
+     * @see Selenese\CommandResult::__construct()
+     */
+    protected function commandResult($continue, $success, $message) {
+        return new CommandResult($continue, $success, $message);
     }
 
 }
