@@ -15,9 +15,26 @@ foreach (glob(__DIR__ . '/lib/Selenese/*/*php') as $file) {
 
 // start phantom
 $cmd = ''. __DIR__ .'/lib/phantomjs-1.9.1-linux-x86_64/bin/phantomjs --webdriver=5555 > phantom.log 2>&1 & echo $!';
+//echo "Starting phantomjs ($cmd)...\n";
 $pid = exec($cmd);
-//echo "Starting phantomjs ($cmd) @ pid $pid\n";
-sleep(1); // todo: to ensure that phantomjs is ready -- need a better way to do this.
+//echo "...pid $pid, waiting on readyness...\n";
+
+// ensure it's ready
+$startWait = time();
+while(1) {
+    $fileContents = file('phantom.log');
+    $lastline = trim(array_pop($fileContents));
+    //echo $lastline . "\n";
+    if (strstr($lastline, 'running on port 5555') !== false) {
+        break;
+    }
+    usleep(1000000 / 100); // 1000000 == 1 second; sleep for .01 seconds
+    if ($startWait + 5 < time()) {
+        echo "ERROR: Unable to determine that phantomjs process was ready after 5 seconds, giving up\n";
+        exit(1);
+    }
+}
+//echo "...ready\n";
 
 use Selenese\Test;
 use Selenese\Runner;
