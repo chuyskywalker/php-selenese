@@ -1,5 +1,5 @@
 <?php
 
-namespace Selenese;
+namespace Selenese\Exception;
 
 class SeleneseException extends \Exception {};
