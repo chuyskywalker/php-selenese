@@ -2,9 +2,6 @@
 
 namespace Selenese\Command;
 
-use Selenese\CommandResult,
-    Selenese\Exception\NoSuchElement;
-
 // verifyElementPresent(locator)
 class verifyElementPresent extends Command {
 
@@ -15,13 +12,13 @@ class verifyElementPresent extends Command {
     {
         try {
             $this->getElement($session, $this->arg1);
-            return new CommandResult(true, true, 'Found');
+            return $this->commandResult(true, true, 'Found');
         }
         catch (NoSuchElement $e) {
-            return new CommandResult(true, false, 'Not found');
+            return $this->commandResult(true, false, 'Not found');
         }
         catch (\Exception $e) {
-            return new CommandResult(false, false, 'Significant error in locating element. Error: ' . $e->getMessage());
+            return $this->commandResult(false, false, 'Significant error in locating element. Error: ' . $e->getMessage());
         }
     }
 

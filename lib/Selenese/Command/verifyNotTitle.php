@@ -2,8 +2,6 @@
 
 namespace Selenese\Command;
 
-use Selenese\CommandResult;
-
 // verifyNotTitle(pattern)
 class verifyNotTitle extends Command {
     public function runWebDriver(\WebDriverSession $session)
@@ -13,7 +11,7 @@ class verifyNotTitle extends Command {
             return $this->verifyNot($title, $this->arg1);
         }
         catch (\Exception $e) {
-            return new CommandResult(false, false, 'Failed to fetch page title. Error: ' . $e->getMessage());
+            return $this->commandResult(false, false, 'Failed to fetch page title. Error: ' . $e->getMessage());
         }
     }
 }
