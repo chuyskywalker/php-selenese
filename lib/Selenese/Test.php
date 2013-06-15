@@ -2,12 +2,13 @@
 
 namespace Selenese;
 
-use Selenese\Command;
+use Selenese\Command\Command,
+    Selenese\Command\Stub;
 
 class Test {
 
     /**
-     * @var Command\Command[]
+     * @var Command[]
      */
     public $commands = array();
 
@@ -18,7 +19,7 @@ class Test {
 
     /**
      * @param string $file
-     * @return Command\Command[]
+     * @return Command[]
      * @throws \InvalidArgumentException
      * @throws \Exception
      */
@@ -67,14 +68,14 @@ class Test {
 
             $commandClass = '\\Selenese\\Command\\' . $command;
             if (class_exists($commandClass)) {
-                /** @var Command\Command $command */
+                /** @var Command $command */
                 $commandObj = new $commandClass();
                 $commandObj->arg1 = ($command == 'open' ? $this->baseUrl : '') . $target;
                 $commandObj->arg2 = $value;
                 $this->commands[] = $commandObj;
             }
             else {
-                $unknowncmd = new \Selenese\Command\unknown();
+                $unknowncmd = new Stub();
                 $unknowncmd->command = $command;
                 $this->commands[] = $unknowncmd;
             }

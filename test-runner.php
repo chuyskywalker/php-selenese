@@ -11,8 +11,8 @@ $pid = exec($cmd);
 echo "Starting phantomjs ($cmd) @ pid $pid\n";
 sleep(1); // todo: to ensure that phantomjs is ready -- need a better way to do this.
 
-use Selenese\Test;
-use Selenese\Runner;
+use Selenese\Test,
+    Selenese\Runner;
 
 try {
     // get the test rolling
