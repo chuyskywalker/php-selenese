@@ -6,6 +6,7 @@ class Locator {
 
     public $type;
     public $argument;
+    public $by;
 
     public function __construct($locator) {
         $explode = explode('=', $locator, 2);
@@ -31,12 +32,28 @@ class Locator {
 //            case 'identifier': // todo: this is possible with some song & dance in a common locator routine
 //            case 'ui': // ha. haha. hahahahahaha. No. Good luck on whomever might tackle this...
 //            case 'dom': // I don't think this one is possible
-            case 'css': $this->type = 'css selector'; break;
-            case 'id': $this->type = 'id'; break;
-            case 'name': $this->type = 'name'; break;
-            case 'link': $this->type = 'partial link text'; break;
-            case 'xpath': $this->type = 'xpath'; break;
-            default: throw new \Exception("Cant currently handle tests with '". $this->type ."' locators, change to another method.");
+            case 'css':
+                $this->by = \WebDriverBy::cssSelector($this->argument);
+                break;
+
+            case 'id':
+                $this->by = \WebDriverBy::id($this->argument);
+                break;
+
+            case 'name':
+                $this->by = \WebDriverBy::name($this->argument);
+                break;
+
+            case 'link':
+                $this->by = \WebDriverBy::partialLinkText($this->argument);
+                break;
+
+            case 'xpath':
+                $this->by = \WebDriverBy::xpath($this->argument);
+                break;
+
+            default:
+                throw new \Exception("Cant currently handle tests with '". $this->type ."' locators, change to another method.");
         }
     }
 
