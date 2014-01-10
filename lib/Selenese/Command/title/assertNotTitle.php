@@ -4,9 +4,9 @@ namespace Selenese\Command;
 
 // assertNotTitle(pattern)
 class assertNotTitle extends Command {
-    public function runWebDriver(\WebDriverSession $session)
+    public function runWebDriver(\WebDriver $session)
     {
-        $title = $session->title();
+        $title = $session->getTitle();
         return $this->assertNot($title, $this->arg1);
     }
 }

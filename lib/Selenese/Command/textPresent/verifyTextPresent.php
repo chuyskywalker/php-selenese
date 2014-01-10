@@ -4,9 +4,9 @@ namespace Selenese\Command;
 
 // verifyTextPresent(pattern)
 class verifyTextPresent extends Command {
-    public function runWebDriver(\WebDriverSession $session)
+    public function runWebDriver(\WebDriver $session)
     {
-        $bodyValue = $session->source();
+        $bodyValue = $session->getPageSource();
         return $this->verify($bodyValue, $this->arg1);
     }
 }

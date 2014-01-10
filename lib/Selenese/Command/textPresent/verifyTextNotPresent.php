@@ -4,9 +4,9 @@ namespace Selenese\Command;
 
 // verifyTextNotPresent(pattern)
 class verifyTextNotPresent extends Command {
-    public function runWebDriver(\WebDriverSession $session)
+    public function runWebDriver(\WebDriver $session)
     {
-        $bodyValue = $session->source();
+        $bodyValue = $session->getPageSource();
         return $this->verifyNot($bodyValue, $this->arg1);
     }
 }

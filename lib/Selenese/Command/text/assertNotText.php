@@ -4,9 +4,9 @@ namespace Selenese\Command;
 
 // assertNotText(locator,pattern)
 class assertNotText extends Command {
-    public function runWebDriver(\WebDriverSession $session)
+    public function runWebDriver(\WebDriver $session)
     {
-        $elementText = $this->getElement($session, $this->arg1)->text();
+        $elementText = $this->getElement($session, $this->arg1)->getText();
         return $this->assertNot($elementText, $this->arg2);
     }
 }

@@ -4,9 +4,9 @@ namespace Selenese\Command;
 
 // assertTextNotPresent(pattern)
 class assertTextNotPresent extends Command {
-    public function runWebDriver(\WebDriverSession $session)
+    public function runWebDriver(\WebDriver $session)
     {
-        $bodyValue = $session->source();
+        $bodyValue = $session->getPageSource();
         return $this->assertNot($bodyValue, $this->arg1);
     }
 }

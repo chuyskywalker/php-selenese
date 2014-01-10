@@ -3,10 +3,10 @@
 namespace Selenese\Command;
 
 class open extends Command {
-    public function runWebDriver(\WebDriverSession $session)
+    public function runWebDriver(\WebDriver $session)
     {
-        $session->open($this->arg1);
-        $url = $session->url();
+        $session->get($this->arg1);
+        $url = $session->getCurrentUrl();
         return $this->commandResult(true, true, 'Opened, url now: ' . $url);
     }
 }

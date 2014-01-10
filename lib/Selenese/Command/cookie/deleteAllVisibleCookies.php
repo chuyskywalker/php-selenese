@@ -3,9 +3,9 @@
 namespace Selenese\Command;
 
 class deleteAllVisibleCookies extends Command {
-    public function runWebDriver(\WebDriverSession $session)
+    public function runWebDriver(\WebDriver $session)
     {
-        $session->deleteAllCookies();
+        $session->manage()->deleteAllCookies();
         return $this->commandResult(true, true, 'All cookies deleted');
     }
 }
