@@ -4,9 +4,9 @@ namespace Selenese\Command;
 
 // verifyNotTitle(pattern)
 class verifyNotTitle extends Command {
-    public function runWebDriver(\WebDriverSession $session)
+    public function runWebDriver(\WebDriver $session)
     {
-        $title = $session->title();
+        $title = $session->getTitle();
         return $this->verifyNot($title, $this->arg1);
     }
 }

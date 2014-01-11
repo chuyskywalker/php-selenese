@@ -17,7 +17,7 @@ abstract class Command {
      * @param \WebDriverSession $session
      * @return CommandResult
      */
-    abstract public function runWebDriver(\WebDriverSession $session);
+    abstract public function runWebDriver(\WebDriver $session);
 
     /**
      * Utility function to fetch an element of throw an error
@@ -28,10 +28,10 @@ abstract class Command {
      * @throws \NoSuchElementWebDriverError
      * @return \WebDriverElement
      */
-    protected function getElement(\WebDriverSession $session, $locator) {
+    protected function getElement(\WebDriver $session, $locator) {
         try {
             $locatorObj = new Locator($locator);
-            $element = $session->element($locatorObj->type, $locatorObj->argument);
+            $element = $session->findElement($locatorObj->by);
         }
         catch (\NoSuchElementWebDriverError $e) {
             $element = null;

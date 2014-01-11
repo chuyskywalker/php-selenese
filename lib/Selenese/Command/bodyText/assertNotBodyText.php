@@ -4,9 +4,9 @@ namespace Selenese\Command;
 
 // assertNotBodyText(pattern)
 class assertNotBodyText extends Command {
-    public function runWebDriver(\WebDriverSession $session)
+    public function runWebDriver(\WebDriver $session)
     {
-        $html = $this->getElement($session, 'css=body')->attribute('innerHTML');
+        $html = $this->getElement($session, 'css=body')->getAttribute('innerHTML');
         return $this->assertNot($html, $this->arg1);
     }
 }

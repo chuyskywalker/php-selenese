@@ -4,9 +4,9 @@ namespace Selenese\Command;
 
 // assertTextPresent(pattern)
 class assertTextPresent extends Command {
-    public function runWebDriver(\WebDriverSession $session)
+    public function runWebDriver(\WebDriver $session)
     {
-        $bodyValue = $session->source();
+        $bodyValue = $session->getPageSource();
         return $this->assert($bodyValue, $this->arg1);
     }
 }

@@ -4,9 +4,9 @@ namespace Selenese\Command;
 
 // verifyTitle(pattern)
 class verifyTitle extends Command {
-    public function runWebDriver(\WebDriverSession $session)
+    public function runWebDriver(\WebDriver $session)
     {
-        $title = $session->title();
+        $title = $session->getTitle();
         return $this->verify($title, $this->arg1);
     }
 }

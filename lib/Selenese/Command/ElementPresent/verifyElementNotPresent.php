@@ -10,7 +10,7 @@ class verifyElementNotPresent extends Command {
     /**
      * @see Command::runWebDriver()
      */
-    public function runWebDriver(\WebDriverSession $session)
+    public function runWebDriver(\WebDriver $session)
     {
         try {
             $this->getElement($session, $this->arg1);

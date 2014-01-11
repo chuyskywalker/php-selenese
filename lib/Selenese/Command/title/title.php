@@ -4,9 +4,9 @@ namespace Selenese\Command;
 
 // title()
 class title extends Command {
-    public function runWebDriver(\WebDriverSession $session)
+    public function runWebDriver(\WebDriver $session)
     {
-        $title = $session->title();
+        $title = $session->getTitle();
         return $this->commandResult(true, true, 'Got page title: "'. $title . '"');
     }
 }
